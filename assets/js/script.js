@@ -49,16 +49,19 @@ function checkAnswer() {
     let calculatedAnswer = calculateCorrectAnswer();
     let isCorrect = userAnswer === calculatedAnswer[0];
 
+    let x = 0;
+
     if (isCorrect) {
         alert("You da man!")
+        incrementScore();
     } else {
         alert(`Unlucky - you answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}!`);
+        incrementWrongAnswer();
     }
 
     runGame(calculatedAnswer[1]);
 
 }
-
 
 /**
  * Gets the operands (the numbers) and the operator (plus, minus etc)
@@ -78,12 +81,28 @@ function calculateCorrectAnswer() {
             }
         }
 
+
+    /**
+     * Get the current correct score from DOM
+     * Increment score by 1
+     * Displayed incremented score
+     */   
     function incrementScore() {
 
+        let answerCorrect = parseInt(document.getElementById("score").innerText)
+        answerCorrect++;
+        document.getElementById('score').textContent = answerCorrect;
     }
 
+     /**
+     * Get the current incorrect score from DOM
+     * Increment score by 1
+     * Displayed incremented score
+     */  
     function incrementWrongAnswer() {
-
+        let answerWrong = parseInt(document.getElementById("incorrect").innerText)
+        answerWrong++;
+        document.getElementById('incorrect').textContent = answerWrong;
     }
 
     function displayAdditionQuestion(operand1, operand2) {
