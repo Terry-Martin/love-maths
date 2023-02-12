@@ -15,6 +15,13 @@ document.addEventListener("DOMContentLoaded", function () {
         })
     }
 
+    // Allow user to use Enter key to input answer
+    document.getElementById("answer-box").addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            checkAnswer();
+        }
+    })
+
     runGame("addition");
 })
 
@@ -24,6 +31,12 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 function runGame(gameType) {
 
+    // Clear answer box before new question
+    document.getElementById("answer-box").value = "";
+
+    // Set cursor at answer input area
+    document.getElementById("answer-box").focus();
+
     // Creates two random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
@@ -32,16 +45,11 @@ function runGame(gameType) {
         displayAdditionQuestion(num1, num2);
     } else if (gameType === "subtract") {
         displaySubtractQuestion(num1, num2);
-    }
-    else if (gameType === "multiply") {
+    } else if (gameType === "multiply") {
         displayMultiplyQuestion(num1, num2);
-    }
-    else if (gameType === "division") {
+    } else if (gameType === "division") {
         displayDivisionQuestion(num1, num2);
-    }
-    
-    
-    else {
+    } else {
         alert(`Unknown game type: ${gameType}`);
         throw (`Unknown game type: ${gameType}. Aborting!`);
     }
